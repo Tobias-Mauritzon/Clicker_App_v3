@@ -12,9 +12,10 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button resultButton;
+    Button resultButton, scoreButton;
     FloatingActionButton resultFloatButton;
     TextView clicker;
+    int globalNum = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         resultButton = findViewById(R.id.button);
+        scoreButton = findViewById(R.id.button_score);
         resultFloatButton = findViewById(R.id.floatingActionButton);
         clicker = findViewById(R.id.Text_Clicker);
 
@@ -48,12 +50,25 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        scoreButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                submit();
+            }
+        });
+
     }
 
     private void add(){
         String text = clicker.getText().toString();
         int num = Integer.parseInt(text);
         num = num + 1;
+        globalNum = num;
         clicker.setText(Integer.toString(num));
+    }
+
+    private void submit(){
+        DatabaseHelper dbHelper = new DatabaseHelper(MainActivity.this);
+        dbHelper.addScore(globalNum);
     }
 }
