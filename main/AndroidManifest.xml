@@ -13,7 +13,7 @@
             android:label="Highest Scores"
             android:parentActivityName=".MainActivity"></activity>
         <activity android:name=".MainActivity"
-            android:label="Clicks Per Minute">
+            android:label="Tap Per Minute">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
