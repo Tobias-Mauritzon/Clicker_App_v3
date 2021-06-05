@@ -2,11 +2,17 @@ package com.example.clicker_app2;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+
+import java.sql.ResultSet;
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
@@ -28,7 +34,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String query = "CREATE TABLE "+DATABASE_NAME+
+        String query = "CREATE TABLE "+TABLE_NAME+
                 " ("+ COLUMN_ID+" INTEGER PRIMARY KEY AUTOINCREMENT, "+
                 COLUMN_SCORE+ " INTEGER, "+
                 COLUMN_TIME+ " TIMESTAMP DEFAULT CURRENT_TIMESTAMP);";
@@ -46,12 +52,27 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         ContentValues cv = new ContentValues();
 
         cv.put(COLUMN_SCORE, score);
-        
+
         long result = db.insert(TABLE_NAME, null, cv);
         if(result == -1){
-            Toast.makeText(context,"Failed insert", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context,"Failed insert ", Toast.LENGTH_SHORT).show();
         }else{
             Toast.makeText(context, "Added successfully", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    public Cursor getTopTenScores(){
+
+        Cursor cursor = null;
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT "+COLUMN_SCORE+ " FROM " + TABLE_NAME+ " ORDER BY "+ COLUMN_SCORE+" DESC LIMIT 10 ";
+        //db.execSQL(query);
+
+        if(db != null){
+            cursor = db.rawQuery(query, null);
+        }
+
+        return cursor;
     }
 }
