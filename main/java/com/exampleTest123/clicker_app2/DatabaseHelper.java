@@ -1,4 +1,4 @@
-package com.example.clicker_app2;
+package com.exampleTest123.clicker_app2;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -8,11 +8,6 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
-
-import java.sql.ResultSet;
-import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.List;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 

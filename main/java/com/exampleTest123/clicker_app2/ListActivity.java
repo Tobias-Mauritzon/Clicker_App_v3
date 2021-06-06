@@ -1,11 +1,9 @@
-package com.example.clicker_app2;
+package com.exampleTest123.clicker_app2;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.ContentValues;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Toast;
